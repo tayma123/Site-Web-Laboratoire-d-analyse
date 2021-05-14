@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Booking</title>
+
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,900"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-time">
+        <h2 class="heading">Time Open</h2>
+        <h3 class="heading-days">Monday-Friday</h3>
+        <p>7am - 12am</p>
+        <p>2pm - 5pm</p>
+
+        <h3 class="heading-days">Saturday and sunday</h3>
+        <p>7am - 2pm</p>
+
+        <hr />
+
+        <h4 class="heading-phone">Call Us: +216 27291830</h4>
+      </div>
+
+      <div class="container-form">
+        <form #addForm="ngForm" (ngSubmit)="onAddRDV(addForm)">
+          <h2 class="heading heading-yellow">Reservation Online</h2>
+
+          <div class="form-group">
+            <label for="id">id</label>
+            <input
+              type="number"
+              ngModel
+              name="id"
+              class="form-control"
+              id="id"
+              placeholder="id"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              ngModel
+              name="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">Analyse</label>
+            <input
+              type="text"
+              ngModel
+              name="name"
+              class="form-control"
+              id="name"
+              placeholder="analyse"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="time">Date</label>
+            <input
+              type="datetime-local"
+              ngModel
+              name="date"
+              class="form-control"
+              id="date"
+              placeholder="date"
+              required
+            />
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="add-rdv-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+         </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

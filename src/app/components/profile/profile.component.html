@@ -1,0 +1,70 @@
+<!--<div class="container" id="main-container">
+    <div class="row">
+         <div class="card m-b-30">
+            <div class="card-body row">
+               
+               <div class="col-6 card-title align-self-center mb-0">
+                 
+                  
+               </div>
+            </div>
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item"><i class="fa fa-envelope float-right"></i><strong>Name:</strong> {{authService?.name}}</li>
+               <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>Email:</strong>  {{authService?.loggedUser}}</li>
+               <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>Phone:</strong> {{authService?.phone}}</li>
+               <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>Password:</strong> {{authService?.password}}</li>
+
+               <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>Role:</strong> {{authService?.role}}</li>
+               <button (click)="getUser_analyses()" >liste des analyses</button>
+               <div *ngFor="let rdv of rdvs">
+                  <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>Id:</strong> {{rdv.id}}</li>
+
+                  <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>nom d'analyse:</strong> {{rdv.name}}</li>
+                  <li class="list-group-item"><i class="fa fa-phone float-right"></i><strong>la date:</strong> {{rdv.date}}</li>
+
+               </div>
+
+            </ul>
+            
+            </div>
+         
+    </div>
+     
+</div>-->
+<div id="main-container">
+  <table class="table table-primary table-hover table-striped">
+    <thead>
+      <th><strong>Name</strong></th>
+      <th><strong>Email</strong></th>
+      <th><strong>Phone</strong></th>
+      <th><strong>Password</strong></th>
+      <th><strong>Role</strong></th>
+    </thead>
+    <tr>
+      <td>{{ authService?.name }}</td>
+      <td>{{ authService?.loggedUser }}</td>
+      <td>{{ authService?.phone }}</td>
+      <td>{{ authService?.password }}</td>
+      <td>{{ authService?.role }}</td>
+    </tr>
+  </table>
+</div>
+<button (click)="getUser_analyses()" class="btn btn-dark" >
+  liste des analyses
+</button>
+
+<div  class="analyse" >
+  <table class="table table-primary table-hover table-striped" *ngFor="let rdv of rdvs">
+    <thead>
+        <th><strong>ID</strong></th>
+        <th><strong>Nom d'analyse</strong></th>
+        <th><strong>La date</strong></th>
+       
+      </thead>
+    <tr >
+      <td> {{ rdv.id }}</td>
+      <td>{{ rdv.name }}</td>
+      <td> {{ rdv.date }}</td>
+    </tr>
+  </table>
+</div>

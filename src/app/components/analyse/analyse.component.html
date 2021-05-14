@@ -1,0 +1,133 @@
+<div>
+   <a class="nav-link"   *ngIf="authService.isAdmin()||authService.isAgent()"(click)="onOpenModal(null, 'add')" align="right">Add User <span class="sr-only">(current)</span></a>
+</div>
+ 
+  <div class="container" id="main-container">
+   <div>
+       <h3>Liste des analyses</h3>
+       <div class="card-body">
+           <table class="table table-striped">
+               <thead>
+                   <th>Nom</th>
+                   <th>Caracteristiques</th>
+                   <th>prix</th>
+                   <th>id</th>
+                   <th></th>
+               </thead>
+               <tbody>
+                   <tr *ngFor="let analyse of analyses">
+                       <td>{{analyse.name}}</td>
+                       <td>{{analyse.caracterstiques}}</td>
+                       <td>{{analyse.prix}}</td>
+                       <td>{{analyse.id}}</td>
+
+                       <td> <div class="float-right btn-group btn-group-sm">
+                        <a *ngIf="authService.isAdmin()||authService.isAgent()" (click)="onOpenModal(analyse, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit">Edit<i class="fa fa-pencil"></i> </a>
+                        <a   *ngIf="authService.isAdmin()||authService.isAgent()" (click)="onOpenModal(analyse, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete">Delete<i class="fa fa-times"></i></a>
+                       </div></td></tr>
+               </tbody>
+
+           </table>
+       </div>
+       </div>
+</div>
+ <!-- Delete Modal -->
+<div class="modal fade" id="deleteAnalyseModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete Analyse</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p>Are you sure you want to delete Analyse{{deleteAnalyse?.name}}?</p>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+               <button (click)="onDeleteAnalyse(deleteAnalyse?.name)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+ <!-- Edit Modal -->
+ <div class="modal fade" id="updateAnalyseModal" tabindex="-1" role="dialog" aria-labelledby="AnalyseEditModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="updateAnalyseModalLabel">Edit Analyse {{editAnalyse?.name}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #editForm="ngForm">
+               <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" ngModel="{{editAnalyse?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+               </div>
+               <div class="form-group">
+                  <label for="id">id</label>
+                  <input type="number" ngModel="{{editAnalyse?.id}}" name="id" class="form-control" id="id" placeholder="id">
+               </div>
+             
+               <div class="form-group">
+                  <label for="caracteristique">Carecteristiques</label>
+                  <input type="text" ngModel="{{editAnalyse?.caracterstiques}}" name="caracteristique" class="form-control" id="email" placeholder="caracteristique">
+               </div>
+               <div class="form-group">
+                  <label for="prix">Prix</label>
+                  <input type="text" ngModel="{{editAnalyse?.prix}}" name="prix" class="form-control" id="prix" name="prix" placeholder="Prix">
+               </div>
+             
+               <div class="modal-footer">
+                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                  <button (click)="onUpdateAnalyse(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+ </div>
+  <!-- add Modal -->
+ <div class="modal fade" id="addAnalyseModal" tabindex="-1" role="dialog" aria-labelledby="addAnalyseModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="addAnalyseModalLabel">Add Analyse</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #addForm="ngForm" (ngSubmit)="onAddAnalyse(addForm)">
+            <div class="form-group">
+                 <label for="id">id</label>
+                 <input type="number" ngModel name="id" class="form-control" id="id" placeholder="id" required>
+            </div>
+           <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+           </div>
+           <div class="form-group">
+              <label for="caracterstiques">caracterstiques</label>
+              <input type="text" ngModel name="caracterstiques" class="form-control" id="caracterstiques" placeholder="caracterstiques" required>
+           </div>
+           
+           <div class="form-group">
+              <label for="prix">Prix</label>
+              <input type="number" ngModel name="prix" class="form-control" id="prix" placeholder="Prix" required>
+           </div>
+
+          
+           <div class="modal-footer">
+              <button type="button" id="add-analyse-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+           </div>
+           </form>
+        </div>
+     </div>
+   </div>
+   </div>
+     
